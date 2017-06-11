@@ -1,0 +1,9 @@
+c:\users\mateusz\documents\visual studio 2017\Projects\WifiCOM\WifiCOM\bin\Debug\WifiCOM.exe.config
+c:\users\mateusz\documents\visual studio 2017\Projects\WifiCOM\WifiCOM\bin\Debug\WifiCOM.exe
+c:\users\mateusz\documents\visual studio 2017\Projects\WifiCOM\WifiCOM\bin\Debug\WifiCOM.pdb
+c:\users\mateusz\documents\visual studio 2017\Projects\WifiCOM\WifiCOM\obj\Debug\WifiCOM.csprojResolveAssemblyReference.cache
+c:\users\mateusz\documents\visual studio 2017\Projects\WifiCOM\WifiCOM\obj\Debug\WifiCOM.Form1.resources
+c:\users\mateusz\documents\visual studio 2017\Projects\WifiCOM\WifiCOM\obj\Debug\WifiCOM.Properties.Resources.resources
+c:\users\mateusz\documents\visual studio 2017\Projects\WifiCOM\WifiCOM\obj\Debug\WifiCOM.csproj.GenerateResource.Cache
+c:\users\mateusz\documents\visual studio 2017\Projects\WifiCOM\WifiCOM\obj\Debug\WifiCOM.exe
+c:\users\mateusz\documents\visual studio 2017\Projects\WifiCOM\WifiCOM\obj\Debug\WifiCOM.pdb
