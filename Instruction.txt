@@ -1,0 +1,10 @@
+1. Do³¹czenie biblioteki using System.IO.Ports;
+2*.Pobranie inf o dostêpnych portach 
+3*.Wpisanie do combobox wartodsi baudrate
+4*.Przypisanie nazwy portu i bredkosci do w³asciwoœci portu
+5. Stworzyæ delegat         
+		string InputData = string.Empty;
+		delegate void SetTextCallback(string text);
+6. Przerwanie od serial port recieved
+		private void SerialReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+	
