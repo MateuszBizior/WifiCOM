@@ -7,4 +7,9 @@
 		delegate void SetTextCallback(string text);
 6. Przerwanie od serial port recieved
 		private void SerialReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
-	
+7.	Przekazanie odebranych danych do funckji SetText obs³uguj¹ca delegat.
+		if (this.ReciveBox.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetText);
+                this.BeginInvoke(d, new object[] { text });
+            }
