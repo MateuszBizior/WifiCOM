@@ -15,6 +15,7 @@ namespace WifiCOM
     public partial class Form1 : Form
     {
         bool flagR = false;
+        bool flagS = false;
         string path;
         string InputData = string.Empty;
         delegate void SetTextCallback(string text);
@@ -54,9 +55,18 @@ namespace WifiCOM
             int mx = 1;
             int my = 1;
             int mz = 1;
+            int a = 1;
+            int b = 1;
+            int c = 1;
+            int dd = 1;
+            int e = 1;
+            int f = 1;
+            int g = 1;
+            int h = 1;
+            int ii = 1;
             StringWriter strWriter = new StringWriter();
 
-            if (this.ReciveBox.InvokeRequired)
+            if (this.PitchTxt.InvokeRequired)
             {
                 SetTextCallback d = new SetTextCallback(SetText);
                 this.BeginInvoke(d, new object[] { text });
@@ -65,13 +75,21 @@ namespace WifiCOM
             {
                 try
                 {
-                    ReciveBox.Text = text;
                     PitchTxt.Text = string.Empty;
                     RollTxt.Text = string.Empty;
                     Ztext.Text = string.Empty;
                     MagnXtxt.Text = string.Empty;
                     MagnYtxt.Text = string.Empty;
                     MagnZtxt.Text = string.Empty;
+                    AccXText.Text = string.Empty;
+                    AccYText.Text = string.Empty;
+                    AccZText.Text = string.Empty;
+                    GyroXtxt.Text = string.Empty;
+                    GyroYtxt.Text = string.Empty;
+                    GyroZtxt.Text = string.Empty;
+                    Acc2Xtxt.Text = string.Empty;
+                    Acc2Ytxt.Text = string.Empty;
+                    Acc2Ztxt.Text = string.Empty;
                     for (int i = 0; i < text.Length; i++)
                     {
                         if (text[i] == 'P')
@@ -122,7 +140,78 @@ namespace WifiCOM
                                 mz++;
                             }
                         }
-
+                        if (text[i] == 'A')
+                        {
+                            while (text[i + a] != 'z')
+                            {
+                                AccXText.Text += text[i + a];
+                                a++;
+                            }
+                        }
+                        if (text[i] == 'B')
+                        {
+                            while (text[i + b] != 'z')
+                            {
+                                AccYText.Text += text[i + b];
+                                b++;
+                            }
+                        }
+                        if (text[i] == 'C')
+                        {
+                            while (text[i + c] != 'z')
+                            {
+                                AccZText.Text += text[i + c];
+                                c++;
+                            }
+                        }
+                        if (text[i] == 'D')
+                        {
+                            while (text[i + dd] != 'z')
+                            {
+                                Acc2Xtxt.Text += text[i + dd];
+                                dd++;
+                            }
+                        }
+                        if (text[i] == 'E')
+                        {
+                            while (text[i + e] != 'z')
+                            {
+                                Acc2Ytxt.Text += text[i + e];
+                                e++;
+                            }
+                        }
+                        if (text[i] == 'F')
+                        {
+                            while (text[i + f] != 'z')
+                            {
+                                Acc2Ztxt.Text += text[i + f];
+                                f++;
+                            }
+                        }
+                        if (text[i] == 'G')
+                        {
+                            while (text[i + g] != 'z')
+                            {
+                                GyroXtxt.Text += text[i + g];
+                                g++;
+                            }
+                        }
+                        if (text[i] == 'H')
+                        {
+                            while (text[i + h] != 'z')
+                            {
+                                GyroYtxt.Text += text[i + h];
+                                h++;
+                            }
+                        }
+                        if (text[i] == 'I')
+                        {
+                            while (text[i + ii] != 'z')
+                            {
+                                GyroZtxt.Text += text[i + ii];
+                                ii++;
+                            }
+                        }
                     }
                 }
                 catch { }
@@ -131,9 +220,19 @@ namespace WifiCOM
                 {
                     try
                     {
-                        using (StreamWriter sw = new StreamWriter(path, true))
+                        if (flagS)
                         {
-                            sw.WriteLine(time.ToString() + ";" + PitchTxt.Text + ";" + RollTxt.Text + ";" + Ztext.Text + ";" + MagnXtxt.Text + ";" + MagnYtxt.Text + ";" + MagnZtxt.Text);
+                            using (StreamWriter sw = new StreamWriter(path, true))
+                            {
+                                sw.WriteLine(time.ToString() + ";" + PitchTxt.Text + ";" + RollTxt.Text + ";" + Ztext.Text + ";" + MagnXtxt.Text + ";" + MagnYtxt.Text + ";" + MagnZtxt.Text + ";" + AccXText.Text + ";" + AccYText.Text + ";" + AccZText.Text);
+                            }
+                        }
+                        if (!flagS)
+                        {
+                            using (StreamWriter sw = new StreamWriter(path, true))
+                            {
+                                sw.WriteLine(time.ToString() + ";" + Acc2Xtxt.Text + ";" + Acc2Ytxt.Text + ";" + Acc2Ztxt.Text + ";" + GyroXtxt.Text + ";" + GyroYtxt.Text + ";" + GyroZtxt.Text);
+                            }
                         }
                     }
                     catch { }
@@ -141,6 +240,7 @@ namespace WifiCOM
                 }
             }
         }
+
 
 
 
@@ -157,21 +257,24 @@ namespace WifiCOM
             try
             {
                 if (serialPort1.IsOpen)
-                    if (comboSelect.SelectedItem.ToString() == "Czyste dane")
-                    {
-                        serialPort1.Write("0");
-                    }
-                    else
-                    if (comboSelect.SelectedItem.ToString() == "Dane po przeliczeniach")
+                {
+                    if (SelectCombo.SelectedItem.ToString() == "Czyste dane")
                     {
                         serialPort1.Write("1");
+                        flagS = true;
+                    }
+                    else
+                    if (SelectCombo.SelectedItem.ToString() == "Dane po przeliczeniu")
+                    {
+                        serialPort1.Write("2");
+                        flagS = false;
                     }
                     else
                     {
                         MessageBox.Show("Nie wybrano rodzaju danych.\nWybierz i spróbuj ponownie.");
                     }
 
-
+                }
             }
             catch(UnauthorizedAccessException)
             {
@@ -229,7 +332,6 @@ namespace WifiCOM
         {
             if(e.KeyCode==Keys.Enter)
             {
-                ReciveBox.Text = PathTxt.Text;
                 path = Environment.CurrentDirectory + "/" + PathTxt.Text;
                 if (!File.Exists(path))
                 {
@@ -252,12 +354,29 @@ namespace WifiCOM
             {
                 RegisterBtn.Text = "Rejestruj";
                 flagR = false;
+                timer1.Enabled = false;
+                time = 0;
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
                 time++;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    serialPort1.Write("0");
+                } 
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("Błąd podczas wysłania danych!!\n Upewnij się czy wybrany port jest dostępny.");
+            }
         }
     }
 }
