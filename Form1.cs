@@ -220,14 +220,14 @@ namespace WifiCOM
                 {
                     try
                     {
-                        if (flagS)
+                        if (!flagS)
                         {
                             using (StreamWriter sw = new StreamWriter(path, true))
                             {
                                 sw.WriteLine(time.ToString() + ";" + PitchTxt.Text + ";" + RollTxt.Text + ";" + Ztext.Text + ";" + MagnXtxt.Text + ";" + MagnYtxt.Text + ";" + MagnZtxt.Text + ";" + AccXText.Text + ";" + AccYText.Text + ";" + AccZText.Text);
                             }
                         }
-                        if (!flagS)
+                        if (flagS)
                         {
                             using (StreamWriter sw = new StreamWriter(path, true))
                             {
